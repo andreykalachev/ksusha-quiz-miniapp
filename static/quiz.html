@@ -278,6 +278,7 @@
             const resultText = `🎨 *${result.title}*\n\n${result.description}\n\n💡 *${recommendationsLabel}:*\n${result.recommendations}`;
             
             tg.sendData(resultText);
+            tg.close();
         }
 
         // Setup Telegram theme colors
