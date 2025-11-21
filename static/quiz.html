@@ -102,6 +102,18 @@
             padding: 40px;
             color: var(--tg-theme-hint-color, #999);
         }
+        /* Result View Styles */
+        .result-view { text-align: center; padding: 20px 0; }
+        .result-title { font-size: 24px; font-weight: bold; margin-bottom: 15px; color: var(--tg-theme-text-color, #000); }
+        .result-description { font-size: 16px; margin-bottom: 20px; color: var(--tg-theme-text-color, #000); }
+        .result-recommendations { 
+            background: var(--tg-theme-secondary-bg-color, #f0f0f0); 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-bottom: 30px; 
+            text-align: left; 
+        }
+        .result-recommendations h4 { margin-bottom: 10px; color: var(--tg-theme-hint-color, #999); font-size: 14px; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -116,6 +128,17 @@
                 <button id="prevBtn" class="secondary" onclick="prevQuestion()" style="display:none;"></button>
                 <button id="nextBtn" onclick="nextQuestion()" disabled></button>
             </div>
+        </div>
+        
+        <!-- Result View -->
+        <div id="resultView" class="hidden result-view">
+            <div class="result-title" id="resultTitle"></div>
+            <div class="result-description" id="resultDescription"></div>
+            <div class="result-recommendations">
+                <h4 id="recommendationsLabel"></h4>
+                <div id="resultRecommendations"></div>
+            </div>
+            <button id="closeBtn" onclick="finishQuiz()"></button>
         </div>
     </div>
 
@@ -243,7 +266,7 @@
                 currentQuestion++;
                 showQuestion();
             } else {
-                submitQuiz();
+                showResult();
             }
         }
 
@@ -272,13 +295,29 @@
             return T.results[resultIdx];
         }
 
-        function submitQuiz() {
+        function showResult() {
+            const result = calculateResult();
+            
+            document.getElementById('quizApp').classList.add('hidden');
+            document.getElementById('resultView').classList.remove('hidden');
+            
+            document.getElementById('resultTitle').textContent = result.title;
+            document.getElementById('resultDescription').textContent = result.description;
+            
+            const recLabel = lang === 'ru' ? 'Наши рекомендации' : 'Our Recommendations';
+            document.getElementById('recommendationsLabel').textContent = recLabel;
+            document.getElementById('resultRecommendations').textContent = result.recommendations;
+            
+            const closeLabel = lang === 'ru' ? 'Отправить результат' : 'Send Result';
+            document.getElementById('closeBtn').textContent = closeLabel;
+        }
+
+        function finishQuiz() {
             const result = calculateResult();
             const recommendationsLabel = lang === 'ru' ? 'Наши рекомендации' : 'Our Recommendations';
             const resultText = `🎨 *${result.title}*\n\n${result.description}\n\n💡 *${recommendationsLabel}:*\n${result.recommendations}`;
             
             tg.sendData(resultText);
-            tg.close();
         }
 
         // Setup Telegram theme colors
