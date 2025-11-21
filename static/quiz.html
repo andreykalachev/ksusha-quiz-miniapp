@@ -138,7 +138,9 @@
                 <h4 id="recommendationsLabel"></h4>
                 <div id="resultRecommendations"></div>
             </div>
-            <button id="closeBtn" onclick="finishQuiz()"></button>
+            <div class="navigation">
+                <button id="closeBtn" onclick="finishQuiz()"></button>
+            </div>
         </div>
     </div>
 
@@ -285,7 +287,9 @@
         function calculateResult() {
             const weights = new Array(T.results.length).fill(0);
             answers.forEach((optionIdx, questionIdx) => {
+                if (optionIdx === undefined || !T.questions[questionIdx]) return;
                 const option = T.questions[questionIdx].options[optionIdx];
+                if (!option) return;
                 option.weights.forEach((weight, i) => {
                     weights[i] += weight;
                 });
@@ -297,7 +301,8 @@
 
         function showResult() {
             const result = calculateResult();
-            
+            if (!result) return;
+
             document.getElementById('quizApp').classList.add('hidden');
             document.getElementById('resultView').classList.remove('hidden');
             
@@ -314,10 +319,13 @@
 
         function finishQuiz() {
             const result = calculateResult();
+            if (!result) return;
+            
             const recommendationsLabel = lang === 'ru' ? 'Наши рекомендации' : 'Our Recommendations';
             const resultText = `🎨 *${result.title}*\n\n${result.description}\n\n💡 *${recommendationsLabel}:*\n${result.recommendations}`;
             
             tg.sendData(resultText);
+            tg.close();
         }
 
         // Setup Telegram theme colors
