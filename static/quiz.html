@@ -114,6 +114,12 @@
             text-align: left; 
         }
         .result-recommendations h4 { margin-bottom: 10px; color: var(--tg-theme-hint-color, #999); font-size: 14px; text-transform: uppercase; }
+        
+        #closeBtn {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -138,9 +144,7 @@
                 <h4 id="recommendationsLabel"></h4>
                 <div id="resultRecommendations"></div>
             </div>
-            <div class="navigation">
-                <button id="closeBtn" onclick="finishQuiz()"></button>
-            </div>
+            <button id="closeBtn" onclick="finishQuiz()"></button>
         </div>
     </div>
 
@@ -170,7 +174,7 @@
                     "of": "из",
                     "next": "Далее →",
                     "prev": "← Назад",
-                    "finish": "✓ Завершить"
+                    "finish": "Показать результат"
                 }
             },
             "en": {
@@ -192,7 +196,7 @@
                     "of": "of",
                     "next": "Next →",
                     "prev": "← Back",
-                    "finish": "✓ Finish"
+                    "finish": "Show Result"
                 }
             }
         };
@@ -313,7 +317,7 @@
             document.getElementById('recommendationsLabel').textContent = recLabel;
             document.getElementById('resultRecommendations').textContent = result.recommendations;
             
-            const closeLabel = lang === 'ru' ? 'Отправить результат' : 'Send Result';
+            const closeLabel = lang === 'ru' ? 'Закрыть' : 'Close';
             document.getElementById('closeBtn').textContent = closeLabel;
         }
 
@@ -325,7 +329,9 @@
             const resultText = `🎨 *${result.title}*\n\n${result.description}\n\n💡 *${recommendationsLabel}:*\n${result.recommendations}`;
             
             tg.sendData(resultText);
-            tg.close();
+            setTimeout(() => {
+                tg.close();
+            }, 100);
         }
 
         // Setup Telegram theme colors
