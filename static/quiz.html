@@ -57,6 +57,7 @@
             height: 60px;
             border-radius: 8px;
             object-fit: cover;
+            background-color: #eee; /* Placeholder color */
         }
         .option:hover {
             background-color: var(--tg-theme-button-color, #0088cc);
@@ -154,14 +155,15 @@
         tg.ready();
 
         // --- QUIZ DATA ---
+        // NOTE: Place your image files in a folder named 'images' next to this html file.
         const quizData = {
             "ru": {
                 "questions": [
-                    {"name":"art_preference","text":"Что вас больше всего привлекает в искусстве?","options":[{"text":"Яркие, насыщенные цвета, придающие энергию","weights":[2,0,1],"image":"/ksusha-quiz-miniapp/static/images/q1_opt1.jpg"},{"text":"Мягкие, спокойные тона, которые успокаивают","weights":[0,2,1],"image":"/ksusha-quiz-miniapp/static/images/q1_opt2.jpg"},{"text":"Темные, драматичные контрасты","weights":[1,1,2],"image":"/ksusha-quiz-miniapp/static/images/q1_opt3.jpg"}]},
-                    {"name":"space_feeling","text":"Каким вы хотите видеть свое пространство?","options":[{"text":"Энергичным и вдохновляющим","weights":[2,0,0],"image":"/ksusha-quiz-miniapp/static/images/q2_opt1.jpg"},{"text":"Спокойным и медитативным","weights":[0,2,0],"image":"/ksusha-quiz-miniapp/static/images/q2_opt2.jpg"},{"text":"Изысканным и драматичным","weights":[0,0,2],"image":"/ksusha-quiz-miniapp/static/images/q2_opt3.jpg"}]},
-                    {"name":"art_style","text":"Какой художественный стиль вам ближе?","options":[{"text":"Абстрактный экспрессионизм - свободный и эмоциональный","weights":[2,1,0],"image":"/ksusha-quiz-miniapp/static/images/q3_opt1.jpg"},{"text":"Минимализм - простой и безмятежный","weights":[0,2,0],"image":"/ksusha-quiz-miniapp/static/images/q3_opt2.jpg"},{"text":"Современный реализм с глубиной","weights":[1,0,2],"image":"/ksusha-quiz-miniapp/static/images/q3_opt3.jpg"}]},
-                    {"name":"mood_preference","text":"Какое настроение вы ищете в произведениях искусства?","options":[{"text":"Радостное и возвышенное","weights":[2,1,0],"image":"/ksusha-quiz-miniapp/static/images/q4_opt1.jpg"},{"text":"Спокойное и созерцательное","weights":[0,2,1],"image":"/ksusha-quiz-miniapp/static/images/q4_opt2.jpg"},{"text":"Интенсивное и провокационное","weights":[1,0,2],"image":"/ksusha-quiz-miniapp/static/images/q4_opt3.jpg"}]},
-                    {"name":"size_preference","text":"Какой размер произведений вас привлекает?","options":[{"text":"Большие акцентные работы","weights":[2,0,1],"image":"/ksusha-quiz-miniapp/static/images/q5_opt1.jpg"},{"text":"Средние работы для баланса","weights":[1,2,1],"image":"/ksusha-quiz-miniapp/static/images/q5_opt2.jpg"},{"text":"Небольшие интимные работы","weights":[0,1,2],"image":"/ksusha-quiz-miniapp/static/images/q5_opt3.jpg"}]}
+                    {"name":"art_preference","text":"Что вас больше всего привлекает в искусстве?","options":[{"text":"Яркие, насыщенные цвета, придающие энергию","weights":[2,0,1],"image":"images/q1_opt1.jpg"},{"text":"Мягкие, спокойные тона, которые успокаивают","weights":[0,2,1],"image":"images/q1_opt2.jpg"},{"text":"Темные, драматичные контрасты","weights":[1,1,2],"image":"images/q1_opt3.jpg"}]},
+                    {"name":"space_feeling","text":"Каким вы хотите видеть свое пространство?","options":[{"text":"Энергичным и вдохновляющим","weights":[2,0,0],"image":"images/q2_opt1.jpg"},{"text":"Спокойным и медитативным","weights":[0,2,0],"image":"images/q2_opt2.jpg"},{"text":"Изысканным и драматичным","weights":[0,0,2],"image":"images/q2_opt3.jpg"}]},
+                    {"name":"art_style","text":"Какой художественный стиль вам ближе?","options":[{"text":"Абстрактный экспрессионизм - свободный и эмоциональный","weights":[2,1,0],"image":"images/q3_opt1.jpg"},{"text":"Минимализм - простой и безмятежный","weights":[0,2,0],"image":"images/q3_opt2.jpg"},{"text":"Современный реализм с глубиной","weights":[1,0,2],"image":"images/q3_opt3.jpg"}]},
+                    {"name":"mood_preference","text":"Какое настроение вы ищете в произведениях искусства?","options":[{"text":"Радостное и возвышенное","weights":[2,1,0],"image":"images/q4_opt1.jpg"},{"text":"Спокойное и созерцательное","weights":[0,2,1],"image":"images/q4_opt2.jpg"},{"text":"Интенсивное и провокационное","weights":[1,0,2],"image":"images/q4_opt3.jpg"}]},
+                    {"name":"size_preference","text":"Какой размер произведений вас привлекает?","options":[{"text":"Большие акцентные работы","weights":[2,0,1],"image":"images/q5_opt1.jpg"},{"text":"Средние работы для баланса","weights":[1,2,1],"image":"images/q5_opt2.jpg"},{"text":"Небольшие интимные работы","weights":[0,1,2],"image":"images/q5_opt3.jpg"}]}
                 ],
                 "results": [
                     {"title":"Энергичный Экспрессионист","description":"Вам нравятся смелые, яркие и эмоциональные произведения.","recommendations":"Ищите абстрактные картины с динамичными мазками и насыщенными цветами."},
@@ -179,11 +181,11 @@
             },
             "en": {
                 "questions": [
-                    {"name":"art_preference","text":"What appeals to you most in art?","options":[{"text":"Bright, vibrant colors that provide energy","weights":[2,0,1],"image":"/ksusha-quiz-miniapp/static/images/q1_opt1.jpg"},{"text":"Soft, calm tones that are soothing","weights":[0,2,1],"image":"/ksusha-quiz-miniapp/static/images/q1_opt2.jpg"},{"text":"Dark, dramatic contrasts","weights":[1,1,2],"image":"/ksusha-quiz-miniapp/static/images/q1_opt3.jpg"}]},
-                    {"name":"space_feeling","text":"How do you want your space to feel?","options":[{"text":"Energetic and inspiring","weights":[2,0,0],"image":"/ksusha-quiz-miniapp/static/images/q2_opt1.jpg"},{"text":"Calm and meditative","weights":[0,2,0],"image":"/ksusha-quiz-miniapp/static/images/q2_opt2.jpg"},{"text":"Sophisticated and dramatic","weights":[0,0,2],"image":"/ksusha-quiz-miniapp/static/images/q2_opt3.jpg"}]},
-                    {"name":"art_style","text":"Which art style is closer to you?","options":[{"text":"Abstract Expressionism - free and emotional","weights":[2,1,0],"image":"/ksusha-quiz-miniapp/static/images/q3_opt1.jpg"},{"text":"Minimalism - simple and serene","weights":[0,2,0],"image":"/ksusha-quiz-miniapp/static/images/q3_opt2.jpg"},{"text":"Modern Realism with depth","weights":[1,0,2],"image":"/ksusha-quiz-miniapp/static/images/q3_opt3.jpg"}]},
-                    {"name":"mood_preference","text":"What mood are you looking for in artworks?","options":[{"text":"Joyful and uplifting","weights":[2,1,0],"image":"/ksusha-quiz-miniapp/static/images/q4_opt1.jpg"},{"text":"Calm and contemplative","weights":[0,2,1],"image":"/ksusha-quiz-miniapp/static/images/q4_opt2.jpg"},{"text":"Intense and provocative","weights":[1,0,2],"image":"/ksusha-quiz-miniapp/static/images/q4_opt3.jpg"}]},
-                    {"name":"size_preference","text":"What size of artworks attracts you?","options":[{"text":"Large accent pieces","weights":[2,0,1],"image":"/ksusha-quiz-miniapp/static/images/q5_opt1.jpg"},{"text":"Medium works for balance","weights":[1,2,1],"image":"/ksusha-quiz-miniapp/static/images/q5_opt2.jpg"},{"text":"Small, intimate works","weights":[0,1,2],"image":"/ksusha-quiz-miniapp/static/images/q5_opt3.jpg"}]}
+                    {"name":"art_preference","text":"What appeals to you most in art?","options":[{"text":"Bright, vibrant colors that provide energy","weights":[2,0,1],"image":"images/q1_opt1.jpg"},{"text":"Soft, calm tones that are soothing","weights":[0,2,1],"image":"images/q1_opt2.jpg"},{"text":"Dark, dramatic contrasts","weights":[1,1,2],"image":"images/q1_opt3.jpg"}]},
+                    {"name":"space_feeling","text":"How do you want your space to feel?","options":[{"text":"Energetic and inspiring","weights":[2,0,0],"image":"images/q2_opt1.jpg"},{"text":"Calm and meditative","weights":[0,2,0],"image":"images/q2_opt2.jpg"},{"text":"Sophisticated and dramatic","weights":[0,0,2],"image":"images/q2_opt3.jpg"}]},
+                    {"name":"art_style","text":"Which art style is closer to you?","options":[{"text":"Abstract Expressionism - free and emotional","weights":[2,1,0],"image":"images/q3_opt1.jpg"},{"text":"Minimalism - simple and serene","weights":[0,2,0],"image":"images/q3_opt2.jpg"},{"text":"Modern Realism with depth","weights":[1,0,2],"image":"images/q3_opt3.jpg"}]},
+                    {"name":"mood_preference","text":"What mood are you looking for in artworks?","options":[{"text":"Joyful and uplifting","weights":[2,1,0],"image":"images/q4_opt1.jpg"},{"text":"Calm and contemplative","weights":[0,2,1],"image":"images/q4_opt2.jpg"},{"text":"Intense and provocative","weights":[1,0,2],"image":"images/q4_opt3.jpg"}]},
+                    {"name":"size_preference","text":"What size of artworks attracts you?","options":[{"text":"Large accent pieces","weights":[2,0,1],"image":"images/q5_opt1.jpg"},{"text":"Medium works for balance","weights":[1,2,1],"image":"images/q5_opt2.jpg"},{"text":"Small, intimate works","weights":[0,1,2],"image":"images/q5_opt3.jpg"}]}
                 ],
                 "results": [
                     {"title":"Energetic Expressionist","description":"You enjoy bold, vibrant, and emotional artworks.","recommendations":"Look for abstract paintings with dynamic strokes and rich colors."},
@@ -272,7 +274,9 @@
                 currentQuestion++;
                 showQuestion();
             } else {
-                showResult();
+                // Hide navigation to prevent double click
+                document.querySelector('.navigation').style.display = 'none';
+                setTimeout(showResult, 100); // Ensure UI updates before showing result
             }
         }
 
@@ -307,17 +311,19 @@
             const result = calculateResult();
             if (!result) return;
 
+            // Hide quiz and show result
             document.getElementById('quizApp').classList.add('hidden');
             document.getElementById('resultView').classList.remove('hidden');
-            
+            document.getElementById('resultView').style.display = 'block';
+
             document.getElementById('resultTitle').textContent = result.title;
             document.getElementById('resultDescription').textContent = result.description;
-            
+
             const recLabel = lang === 'ru' ? 'Наши рекомендации' : 'Our Recommendations';
             document.getElementById('recommendationsLabel').textContent = recLabel;
             document.getElementById('resultRecommendations').textContent = result.recommendations;
-            
-            const closeLabel = lang === 'ru' ? 'Закрыть' : 'Close';
+
+            const closeLabel = lang === 'ru' ? 'Завершить' : 'Finish';
             document.getElementById('closeBtn').textContent = closeLabel;
         }
 
